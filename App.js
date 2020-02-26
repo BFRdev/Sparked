@@ -1,11 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import CategoryList from './components/categoryList';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
       <Text>Changed Text homies</Text>
+      {/* categories list uncomment to view. needs to be places in stack nav with auth
+      <CategoryList></CategoryList> */}
     </View>
   );
 }
