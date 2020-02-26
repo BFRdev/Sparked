@@ -1,5 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+
+
 import * as firebase from 'firebase'
 
 export default class RegisterScreen extends React.Component {
@@ -81,7 +83,7 @@ export default class RegisterScreen extends React.Component {
                     <Text style={{ color: "#FFF", fontWeight: "500" }}>Sign up</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={{alignSelf: "center", marginTop: 32}}>
+                <TouchableOpacity style={{alignSelf: "center", marginTop: 32}}  onPress={() => this.props.navigation.navigate("Login")}>
                     <Text style={{ color: "#FFF", fontSize: 13}}>
                         Already have a Sparked account? <Text style={{fontWeight: "500", color: "#EF9D53"}}>Login</Text>
                     </Text>

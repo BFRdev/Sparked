@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-nat
 import * as firebase from 'firebase'
 import CategoryList from '../components/categoryList'; 
 
-export default class HomeScreen extends React.Component {
+export default class CategorySignin extends React.Component {
     state = {
         email: "",
         displayName: ""
@@ -27,7 +27,7 @@ export default class HomeScreen extends React.Component {
     render() {
         return (
             <SafeAreaView style={styles.container}>
-                <Text>Hi {this.state.email}!</Text>
+                <Text>Hi {this.state.displayName}!</Text>
                 <CategoryList></CategoryList>
 
                 <TouchableOpacity style={{ marginTop: 32 }} onPress={this.signOutUser}>

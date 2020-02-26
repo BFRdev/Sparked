@@ -52,7 +52,7 @@ export default class LoginScreen extends React.Component {
                     </View>
                 </View>
 
-
+            {/*  fix ()=> navigation.navigate('Feed')} */}
                 <TouchableOpacity style={styles.button} onPress={this.handleLogin}>
                     <Text style={{ color: "#FFF", fontWeight: "500" }}>Sign in</Text>
                 </TouchableOpacity>
