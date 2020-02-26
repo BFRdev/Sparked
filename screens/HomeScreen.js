@@ -1,6 +1,7 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import * as firebase from 'firebase'
+import CategoryList from '../components/categoryList'; 
 
 export default class HomeScreen extends React.Component {
     state = {
@@ -25,13 +26,14 @@ export default class HomeScreen extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
                 <Text>Hi {this.state.email}!</Text>
+                <CategoryList></CategoryList>
 
                 <TouchableOpacity style={{ marginTop: 32 }} onPress={this.signOutUser}>
                     <Text>Logout</Text>
                 </TouchableOpacity>
-            </View>
+            </SafeAreaView>
 
         );
     }
