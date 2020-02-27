@@ -1,8 +1,12 @@
 import React from 'react'
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native'
 import * as firebase from 'firebase'
+import { LinearGradient } from 'expo-linear-gradient';
+import logo from '../assets/Logo.png';
+
 
 export default class LoginScreen extends React.Component {
+
     state = {
         email: "",
         password: "",
@@ -22,48 +26,62 @@ export default class LoginScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.greeting}>
-                    {'Sparked \nWelcome back.'}
-                </Text>
-            
-                <View style={styles.errorMessage}>
-                    {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text>}
-                </View>
+                <LinearGradient 
+                colors={['#1893A3', '#0D52BA']}
+                style={styles.container }>
 
-                <View style={styles.form}>
-                    <View>
-                        <Text style={styles.inputTitle}>Email Address</Text>
-                        <TextInput 
-                        style={styles.input} 
-                        autoCapitalize="none" 
-                        onChangeText={email => this.setState({ email })}
-                        value={this.state.email}
-                        ></TextInput>
-                    </View>
-
-                    <View style={{marginTop: 32}}>
-                        <Text style={styles.inputTitle}> Password </Text>
-                        <TextInput style={styles.input} 
-                        secureTextEntry  
-                        autoCapitalize="none" 
-                        onChangeText={password => this.setState({ password })}
-                        value={this.state.password}
-                        ></TextInput>
-                    </View>
-                </View>
-
-            {/*  fix ()=> navigation.navigate('Feed')} */}
-                <TouchableOpacity style={styles.button} onPress={this.handleLogin}>
-                    <Text style={{ color: "#FFF", fontWeight: "500" }}>Sign in</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={{alignSelf: "center", marginTop: 32}}
-                onPress={() => this.props.navigation.navigate("Register")}
-                >
-                    <Text style={{ color: "#FFF", fontSize: 13}}>
-                        New to Sparked? <Text style={{fontWeight: "500", color: "#EF9D53"}}>Sign Up</Text>
+                    <Image source={logo}
+                    style={styles.sparkLogo}
+                    />
+                    
+                    <Text style={styles.greeting}>
+                        Welcome back.
                     </Text>
-                </TouchableOpacity>
+
+                    <View style={styles.errorMessage}>
+                        {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text>}
+                    </View>
+
+                    <View style={styles.form}>
+                        <View>
+                            
+                            <TextInput 
+                            style={styles.emailInput} 
+                            placeholder="Email"
+                            autoCapitalize="none"
+                            onChangeText={email => this.setState({ email })}
+                            value={this.state.email}
+                            ></TextInput>
+                        </View>
+
+                        <View style={{marginTop: 15}}>
+                            
+                            <TextInput style={styles.passwordInput} 
+                            placeholder="Password"
+                            secureTextEntry  
+                            autoCapitalize="none" 
+                            onChangeText={password => this.setState({ password })}
+                            value={this.state.password}
+                            ></TextInput>
+                        </View>
+                    </View>
+                    
+                    <TouchableOpacity style={styles.button} onPress={this.handleLogin}>
+
+                    <Text style={{ color: "#FFF", fontWeight: "500" }}>Sign in</Text>
+
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={{alignSelf: "center", marginTop: 32}} onPress={() => this.props.navigation.navigate("Register")}>
+                        
+                        <Text style={{ color: "#FFF", fontSize: 13}}>
+                        New to Sparked?
+                        <Text style={{fontWeight: "500", color: "#EF9D53"}}>Sign Up</Text>
+                        </Text>
+                    
+                    </TouchableOpacity>
+
+                </LinearGradient>
             </View>
 
            
@@ -76,11 +94,16 @@ export default class LoginScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#1893A3"
-    
+    },
+    sparkLogo: {
+        resizeMode: 'center',
+        justifyContent: "center",
+        marginHorizontal:-310,
+        marginTop: -100,
+        marginBottom: -100
+
     },
     greeting: {
-        marginTop: 32,
         fontSize: 18,
         fontWeight: "400",
         textAlign: "center"
@@ -107,12 +130,25 @@ const styles = StyleSheet.create({
         fontSize: 10,
         textTransform: "uppercase"
     },
-    input: {
-        borderBottomColor: "#FFF",
-        borderBottomWidth: StyleSheet.hairlineWidth,
-        height: 40,
+    emailInput: {
+        backgroundColor: '#FFF',
+        borderRadius: 8,
+        borderColor: '#EF9D53',
+        borderWidth: 5,
+        padding: 10,
+        height: 45,
         fontSize: 15,
-        color: "#FFF",
+        color: 'black'
+    },
+    passwordInput: {
+        backgroundColor: '#FFF',
+        borderRadius: 8,
+        borderColor: '#EF9D53',
+        borderWidth: 5,
+        padding: 10,
+        height: 45,
+        fontSize: 15,
+        color: 'black'
     },
     button: {
         marginHorizontal: 30,

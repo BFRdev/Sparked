@@ -13,7 +13,8 @@ export default class RegisterScreen extends React.Component {
         errorMessage: null
     };
 
-    handleSignUp = () => {
+    // sign up function 
+    handleSignUp = (navigation) => {
         firebase
         .auth()
         .createUserWithEmailAndPassword(this.state.email, this.state.password)
@@ -25,6 +26,7 @@ export default class RegisterScreen extends React.Component {
         .catch(error => this.setState({ errorMessage: error.message }));
     };
 
+    // render on screen
     render() {
         return (
             <View style={styles.container}>
@@ -78,11 +80,13 @@ export default class RegisterScreen extends React.Component {
                     </View>
                 </View>
 
-
+                {/* this.handleSignUp.then, () => this.props.navigation.navigate("Category")} */}
+                {/* signup process (fix) */}
                 <TouchableOpacity style={styles.button} onPress={this.handleSignUp}>
                     <Text style={{ color: "#FFF", fontWeight: "500" }}>Sign up</Text>
                 </TouchableOpacity>
 
+                {/* back to login */}
                 <TouchableOpacity style={{alignSelf: "center", marginTop: 32}}  onPress={() => this.props.navigation.navigate("Login")}>
                     <Text style={{ color: "#FFF", fontSize: 13}}>
                         Already have a Sparked account? <Text style={{fontWeight: "500", color: "#EF9D53"}}>Login</Text>

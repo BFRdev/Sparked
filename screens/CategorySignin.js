@@ -17,9 +17,9 @@ export default class CategorySignin extends React.Component {
         
     }
 
-    signOutUser = () => {
-        firebase.auth().signOut();
-    };
+    // signOutUser = () => {
+    //     firebase.auth().signOut();
+    // };
 
 
 
@@ -27,7 +27,7 @@ export default class CategorySignin extends React.Component {
     render() {
         return (
             <SafeAreaView style={styles.container}>
-                <Text>Hi {this.state.displayName}!</Text>
+                <Text>Choose your Sparks {this.state.displayName}</Text>
                 <CategoryList></CategoryList>
 
                 <TouchableOpacity style={{ marginTop: 32 }} onPress={this.signOutUser}>

@@ -25,16 +25,16 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 //firebase.analytics();
 
-//category 
-const Appstack = createStackNavigator({
-  Category : CategorySignin,
-  Feed: FeedScreen
+//navivation once logged in 
+const LoginStack = createStackNavigator({
+  Feed: FeedScreen,
 })
 
-//log in and register stacks 
+//auth navigation
 const AuthStack = createStackNavigator({
   Login: LoginScreen,
-  Register: RegisterScreen
+  Register: RegisterScreen, 
+  pickCategory : CategorySignin,
 })
 
 //create navigation 
@@ -42,11 +42,15 @@ export default createAppContainer(
   createSwitchNavigator(
     {
       Loading: LoadingScreen,
-      App: Appstack,
-      Auth: AuthStack
+      Auth: AuthStack,
+      App: LoginStack,
+     
     },
     {
-      initialRouteName: "Loading"
+      initialRouteName: "Loading",
+      defaultNavigationOptions: {
+        title: 'App'
+      }
     }
   )
 );
