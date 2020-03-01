@@ -2,6 +2,14 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import firebase from '../firebase'
 
+// export const FeedScreen = ({}) => {
+//     return( 
+//         <Center>
+//             <Text>Search Screen</Text>
+//         </Center>
+//     );
+// }
+
 
 //news feed page of user 
 export default class FeedScreen extends React.Component {
@@ -27,6 +35,7 @@ export default class FeedScreen extends React.Component {
             <SafeAreaView style={styles.container}>
                 <Text>Hi this is the news feed under construction!</Text>
                 
+                {/* log out func */}
                 <TouchableOpacity style={{ marginTop: 32 }} onPress={this.signOutUser}>
                     <Text>Logout</Text>
                 </TouchableOpacity>

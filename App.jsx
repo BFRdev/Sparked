@@ -1,26 +1,35 @@
 
-import {createAppContainer, createSwitchNavigator} from 'react-navigation'
-import {createStackNavigator} from 'react-navigation-stack'
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
+import { NavigationContainer } from '@react-navigation/native'
 
 
-import LoadingScreen from './screens/LoadingScreen'
-import LoginScreen from './screens/LoginScreen'
-import RegisterScreen from './screens/RegisterScreen'
-import CategorySignin from './screens/CategorySignin'
-import FeedScreen from './screens/FeedScreen'
+// screens import 
+import LoadingScreen from './screens/LoadingScreen';
+import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
+import CategorySignin from './screens/CategorySignin';
+import FeedScreen from './screens/FeedScreen';
+
+// tab navigator 
+import {AppTabs} from './AppTabs'
 
 //navivation once logged in 
 const LoginStack = createStackNavigator({
-  Feed: FeedScreen,
+  Feed: AppTabs,
 });
 
 //auth navigation
 const AuthStack = createStackNavigator({
   Login: LoginScreen,
   Register: RegisterScreen, 
-  pickCategory : CategorySignin,
 
 });
+
+<NavigationContainer>
+
+  
+</NavigationContainer>
 
 //create navigation 
 export default createAppContainer(
