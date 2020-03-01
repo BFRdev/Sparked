@@ -34,9 +34,9 @@ export default class LoginScreen extends React.Component {
                     style={styles.sparkLogo}
                     />
                     
-                    <Text style={styles.greeting}>
+                    {/* <Text style={styles.greeting}>
                         Welcome back.
-                    </Text>
+                    </Text> */}
 
                     <View style={styles.errorMessage}>
                         {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text>}

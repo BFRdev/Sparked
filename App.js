@@ -6,7 +6,6 @@ import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
 import CategorySignin from './screens/CategorySignin'
 import FeedScreen from './screens/FeedScreen'
-
 import * as firebase from 'firebase'
 
 //firebacse key 
@@ -32,7 +31,7 @@ const LoginStack = createStackNavigator({
 
 //auth navigation
 const AuthStack = createStackNavigator({
-  Login: LoginScreen,
+   Login: LoginScreen,
   Register: RegisterScreen, 
   pickCategory : CategorySignin,
 })
