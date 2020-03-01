@@ -1,8 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import firebase from '../firebase'
 
-//firebace key 
-import * as firebase from 'firebase'
 
 //news feed page of user 
 export default class FeedScreen extends React.Component {
