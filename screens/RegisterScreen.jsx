@@ -14,7 +14,7 @@ export default class RegisterScreen extends React.Component {
     };
 
     // sign up function 
-    handleSignUp = (navigation) => {
+    handleSignUp = ({navigation}) => {
         firebase
         .auth()
         .createUserWithEmailAndPassword(this.state.email, this.state.password)
@@ -40,6 +40,7 @@ export default class RegisterScreen extends React.Component {
 
                 <View style={styles.form}>
                     <View>
+                        {/* user enters full name */}
                         <Text style={styles.inputTitle}>Full Name</Text>
                         <TextInput 
                         style={styles.input} 
@@ -49,6 +50,7 @@ export default class RegisterScreen extends React.Component {
                         ></TextInput>
                     </View>
 
+                    {/* user enters email address */}
                     <View style={{marginTop: 32}}>
                         <Text style={styles.inputTitle}>Email Address</Text>
                         <TextInput 
@@ -59,6 +61,7 @@ export default class RegisterScreen extends React.Component {
                         ></TextInput>
                     </View>
 
+                    {/* user enters user name */}
                     <View style={{marginTop: 32}}>
                         <Text style={styles.inputTitle}>User Name</Text>
                         <TextInput 
@@ -69,8 +72,9 @@ export default class RegisterScreen extends React.Component {
                         ></TextInput>
                     </View>
 
+                    {/* uset creates password */}
                     <View style={{marginTop: 32}}>
-                        <Text style={styles.inputTitle}> Password </Text>
+                        <Text style={styles.inputTitle}> Create Password </Text>
                         <TextInput style={styles.input} 
                         secureTextEntry  
                         autoCapitalize="none" 
@@ -80,7 +84,6 @@ export default class RegisterScreen extends React.Component {
                     </View>
                 </View>
 
-                {/* this.handleSignUp.then, () => this.props.navigation.navigate("Category")} */}
                 {/* signup process (fix) */}
                 <TouchableOpacity style={styles.button} onPress={this.handleSignUp}>
                     <Text style={{ color: "#FFF", fontWeight: "500" }}>Sign up</Text>
