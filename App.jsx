@@ -1,6 +1,6 @@
 import React from 'react'
-import {createAppContainer, createSwitchNavigator} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 // import { NavigationContainer } from '@react-navigation/native';
 // import { createStackNavigator } from '@react-navigation/stack';
@@ -12,7 +12,7 @@ import CategorySignin from './screens/CategorySignin';
 import FeedScreen from './screens/FeedScreen';
 
 // tab navigator 
-import {AppTabs}  from './AppTabs';
+import { AppTabs } from './AppTabs';
 
 // create stack nav v5
 // const Stack = createStackNavigator();
@@ -38,8 +38,14 @@ import {AppTabs}  from './AppTabs';
 //navivation once logged in 
 const LoginedStack = createStackNavigator({
   // fix here 
-  Nav: AppTabs,
-});
+  Sparked: AppTabs,
+}, 
+{
+  navigationOptions: {
+    header: null,
+  },
+}
+);
 
 //auth navigation
 const AuthStack = createStackNavigator({

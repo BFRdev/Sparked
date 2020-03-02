@@ -5,6 +5,12 @@ import firebase from '../firebase'
 
 
 export default class RegisterScreen extends React.Component {
+
+    // remove stack header
+    static navigationOptions = {
+        headerShown: false,
+    };
+
     state = {
         name: "",
         email: "",
@@ -14,16 +20,16 @@ export default class RegisterScreen extends React.Component {
     };
 
     // sign up function 
-    handleSignUp = ({navigation}) => {
+    handleSignUp = ({ navigation }) => {
         firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.state.email, this.state.password)
-        .then(userCredentials => {
-            return userCredentials.user.updateProfile({
-                displayName: this.state.name
-            });
-        })
-        .catch(error => this.setState({ errorMessage: error.message }));
+            .auth()
+            .createUserWithEmailAndPassword(this.state.email, this.state.password)
+            .then(userCredentials => {
+                return userCredentials.user.updateProfile({
+                    displayName: this.state.name
+                });
+            })
+            .catch(error => this.setState({ errorMessage: error.message }));
     };
 
     // render on screen
@@ -33,7 +39,7 @@ export default class RegisterScreen extends React.Component {
                 <Text style={styles.greeting}>
                     {'Sparked \nSign up to get started.'}
                 </Text>
-            
+
                 <View style={styles.errorMessage}>
                     {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text>}
                 </View>
@@ -42,44 +48,44 @@ export default class RegisterScreen extends React.Component {
                     <View>
                         {/* user enters full name */}
                         <Text style={styles.inputTitle}>Full Name</Text>
-                        <TextInput 
-                        style={styles.input} 
-                        autoCapitalize="none" 
-                        onChangeText={name => this.setState({ name })}
-                        value={this.state.name}
+                        <TextInput
+                            style={styles.input}
+                            autoCapitalize="none"
+                            onChangeText={name => this.setState({ name })}
+                            value={this.state.name}
                         ></TextInput>
                     </View>
 
                     {/* user enters email address */}
-                    <View style={{marginTop: 32}}>
+                    <View style={{ marginTop: 32 }}>
                         <Text style={styles.inputTitle}>Email Address</Text>
-                        <TextInput 
-                        style={styles.input} 
-                        autoCapitalize="none" 
-                        onChangeText={email => this.setState({ email })}
-                        value={this.state.email}
+                        <TextInput
+                            style={styles.input}
+                            autoCapitalize="none"
+                            onChangeText={email => this.setState({ email })}
+                            value={this.state.email}
                         ></TextInput>
                     </View>
 
                     {/* user enters user name */}
-                    <View style={{marginTop: 32}}>
+                    <View style={{ marginTop: 32 }}>
                         <Text style={styles.inputTitle}>User Name</Text>
-                        <TextInput 
-                        style={styles.input} 
-                        autoCapitalize="none" 
-                        onChangeText={user => this.setState({ user })}
-                        value={this.state.user}
+                        <TextInput
+                            style={styles.input}
+                            autoCapitalize="none"
+                            onChangeText={user => this.setState({ user })}
+                            value={this.state.user}
                         ></TextInput>
                     </View>
 
                     {/* uset creates password */}
-                    <View style={{marginTop: 32}}>
+                    <View style={{ marginTop: 32 }}>
                         <Text style={styles.inputTitle}> Create Password </Text>
-                        <TextInput style={styles.input} 
-                        secureTextEntry  
-                        autoCapitalize="none" 
-                        onChangeText={password => this.setState({ password })}
-                        value={this.state.password}
+                        <TextInput style={styles.input}
+                            secureTextEntry
+                            autoCapitalize="none"
+                            onChangeText={password => this.setState({ password })}
+                            value={this.state.password}
                         ></TextInput>
                     </View>
                 </View>
@@ -90,14 +96,14 @@ export default class RegisterScreen extends React.Component {
                 </TouchableOpacity>
 
                 {/* back to login */}
-                <TouchableOpacity style={{alignSelf: "center", marginTop: 32}}  onPress={() => this.props.navigation.navigate("Login")}>
-                    <Text style={{ color: "#FFF", fontSize: 13}}>
-                        Already have a Sparked account? <Text style={{fontWeight: "500", color: "#EF9D53"}}>Login</Text>
+                <TouchableOpacity style={{ alignSelf: "center", marginTop: 32 }} onPress={() => this.props.navigation.navigate("Login")}>
+                    <Text style={{ color: "#FFF", fontSize: 13 }}>
+                        Already have a Sparked account? <Text style={{ fontWeight: "500", color: "#EF9D53" }}>Login</Text>
                     </Text>
                 </TouchableOpacity>
             </View>
 
-           
+
 
         );
     }
@@ -108,7 +114,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#1893A3"
-    
+
     },
     greeting: {
         marginTop: 32,
