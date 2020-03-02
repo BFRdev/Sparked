@@ -6,9 +6,9 @@ import { Ionicons, MaterialIcons, FontAwesome } from '@expo/vector-icons';
 
 //import screens for tabs navigator
 import { GoalsScreen } from './screens/GoalsScreen';
-import FeedScreen from './screens/FeedScreen';
-import { SearchScreen } from './screens/SearchScreen';
-import { ProfileScreen } from './screens/ProfileScreen';
+import { FeedScreen } from './screens/FeedScreen';
+import  {SearchScreen}  from './screens/SearchScreen';
+import  ProfileScreen  from './screens/ProfileScreen';
 
 
 //declare tab-nav
