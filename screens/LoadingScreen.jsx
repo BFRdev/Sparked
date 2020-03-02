@@ -1,6 +1,7 @@
 import React from 'react'
-import {View, Text, StyleSheet, ActivityIndicator} from 'react-native'
+import {Text, ActivityIndicator} from 'react-native'
 import firebase from '../firebase'
+import { Center } from '../components/Center';
 
 export default class LoadingScreen extends React.Component {
     componentDidMount() {
@@ -12,20 +13,12 @@ export default class LoadingScreen extends React.Component {
     
     render() {
         return (
-            <View style={styles.container}>
+            <Center>
                 <Text>Loading...</Text>
                 <ActivityIndicator size="large"></ActivityIndicator>
-            </View>
+            </Center>
 
         );
     }
 
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
-    }
-});
