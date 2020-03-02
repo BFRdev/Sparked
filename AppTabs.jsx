@@ -1,5 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+
+import { Ionicons, MaterialIcons, FontAwesome } from '@expo/vector-icons';
 
 //import screens for tabs navigator
 import { GoalsScreen } from './screens/GoalsScreen';
@@ -7,13 +10,12 @@ import { FeedScreen } from './screens/FeedScreen';
 import { SearchScreen } from './screens/SearchScreen';
 import { ProfileScreen } from './screens/ProfileScreen';
 
-import { NavigationContainer } from '@react-navigation/native';
 
 //declare tab-nav
 const Tabs = createBottomTabNavigator()
 
 
-export const AppTabs = ({ }) => {
+export const AppTabs = ({}) => {
     return (
         <NavigationContainer>
             <Tabs.Navigator
@@ -23,17 +25,14 @@ export const AppTabs = ({ }) => {
                         let iconName;
 
                         if (route.name === 'Goals') {
-                            //add custom icon
+                            return <MaterialIcons name={"playlist-add-check"} size={size} color={color} />;
                         } else if (route.name === 'Feed') {
-                            //add custom icon
+                            return <FontAwesome name={"feed"} size={size} color={color} />;
                         } else if (route.name === 'Search') {
-                            //add custom icon
+                            // return <FontAwesome name={"profile"} size={size} color={color} />;
                         } else if (route.name === 'Profile') {
                             // return <FontAwesome name={"profile"} size={size} color={color} />;
                         }
-
-                        // You can return any component that you like here!
-                        return <Ionicons name={iconName} size={size} color={color} />;
                     },
                 })}
                 tabBarOptions={{

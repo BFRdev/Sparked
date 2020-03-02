@@ -12,7 +12,7 @@ import CategorySignin from './screens/CategorySignin';
 import FeedScreen from './screens/FeedScreen';
 
 // tab navigator 
-import AppTabs  from './AppTabs';
+import {AppTabs}  from './AppTabs';
 
 // create stack nav v5
 // const Stack = createStackNavigator();
@@ -20,9 +20,6 @@ import AppTabs  from './AppTabs';
 // new navigation, if logged in goto tab navigator else goto authentication
 // export const Routes = ({ }) => {
 //   return (
-
-
-
 //     <NavigationContainer>
 //       {email ? (<AppTabs/>) : (<Stack.Navigator initialRouteName="Loading"
 //         screenOptions={{ header: () => null }}
@@ -40,7 +37,8 @@ import AppTabs  from './AppTabs';
 // old stack nav for auth, directs to single component once logged in v4
 //navivation once logged in 
 const LoginedStack = createStackNavigator({
-  Feed: FeedScreen,
+  // fix here 
+  Nav: AppTabs,
 });
 
 //auth navigation
@@ -49,7 +47,6 @@ const AuthStack = createStackNavigator({
   Register: RegisterScreen,
 
 });
-
 
 //create navigation 
 export default createAppContainer(
