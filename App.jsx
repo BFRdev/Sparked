@@ -14,25 +14,36 @@ import FeedScreen from './screens/FeedScreen';
 // tab navigator 
 import { AppTabs } from './AppTabs';
 
-// create stack nav v5
-// const Stack = createStackNavigator();
+//const Stack = createStackNavigator();
 
-// new navigation, if logged in goto tab navigator else goto authentication
-// export const Routes = ({ }) => {
-//   return (
-//     <NavigationContainer>
-//       {email ? (<AppTabs/>) : (<Stack.Navigator initialRouteName="Loading"
-//         screenOptions={{ header: () => null }}
-//       >
-//         <Stack.Screen name="Loading" component={LoadingScreen} />
-//         <Stack.Screen name="Login" component={LoginScreen} />
-//         <Stack.Screen name="Regierter" component={RegisterScreen} />
 
-//       </Stack.Navigator>)}
-//     </NavigationContainer>
-//   );
-// }
-
+    // <NavigationContainer>
+    //   <Stack.Navigator
+    //     initialRouteName="Loading"
+    //     navigationOptions={{header: () => null}}
+    //   >
+    //     <Stack.Screen
+    //       name="Loading"
+    //       component={LoadingScreen}
+    //       // options={{ title: 'My app' }}
+    //     />
+    //     <Stack.Screen
+    //       name="Login"
+    //       component={LoginScreen}
+    //       // initialParams={{ user: 'me' }}
+    //     />
+    //       <Stack.Screen
+    //       name="Register"
+    //       component={RegisterScreen}
+    //       // initialParams={{ user: 'me' }}
+    //     />
+    //     <Stack.Screen
+    //       name="Sparked"
+    //       component={AppTabs}
+    //       // initialParams={{ user: 'me' }}
+    //     />
+    //   </Stack.Navigator>
+    // </NavigationContainer>
 
 // old stack nav for auth, directs to single component once logged in v4
 //navivation once logged in 
@@ -47,7 +58,7 @@ const LoginedStack = createStackNavigator({
 }
 );
 
-//auth navigation
+// //auth navigation
 const AuthStack = createStackNavigator({
   Login: LoginScreen,
   Register: RegisterScreen,

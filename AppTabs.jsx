@@ -30,15 +30,15 @@ export const AppTabs = ({ }) => {
                         } else if (route.name === 'Feed') {
                             return <FontAwesome name={"feed"} size={size} color={color} />;
                         } else if (route.name === 'Search') {
-                            // return <FontAwesome name={"profile"} size={size} color={color} />;
+                             return <FontAwesome name={"search"} size={size} color={color} />;
                         } else if (route.name === 'Profile') {
-                            // return <FontAwesome name={"profile"} size={size} color={color} />;
+                            return <Ionicons name={"md-person"} size={size} color={color} />;
                         }
                     },
                 })}
                 tabBarOptions={{
-                    activeTintColor: 'tomato',
-                    inactiveTintColor: 'gray',
+                    activeTintColor: '#EF9D53',
+                    inactiveTintColor: '#0D52BA',
                 }}
             >
                 {/* screen routes */}
