@@ -29,7 +29,7 @@ export default class ProfileScreen extends React.Component {
     render() {
         return (
             <Center>
-                <Text>Profile Screen</Text>
+                <Text>Profile Screen {this.state.displayName}</Text>
                 {/* log out func */}
                 <TouchableOpacity style={{ marginTop: 32 }} onPress={this.signOutUser}>
                     <Text>Logout</Text>

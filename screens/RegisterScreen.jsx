@@ -10,7 +10,7 @@ const screenWidth = Dimensions.get('screen').width;
 
 
 export default class RegisterScreen extends React.Component {
-       // remove stack header
+    // remove stack header
        static navigationOptions = {
         headerShown: false,
       };
