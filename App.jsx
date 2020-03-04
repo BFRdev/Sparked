@@ -14,38 +14,44 @@ import FeedScreen from './screens/FeedScreen';
 // tab navigator 
 import { AppTabs } from './AppTabs';
 
-//const Stack = createStackNavigator();
+// const Stack = createStackNavigator()
 
+// export default class App extends React.Component {
 
-    // <NavigationContainer>
-    //   <Stack.Navigator
-    //     initialRouteName="Loading"
-    //     navigationOptions={{header: () => null}}
-    //   >
-    //     <Stack.Screen
-    //       name="Loading"
-    //       component={LoadingScreen}
-    //       // options={{ title: 'My app' }}
-    //     />
-    //     <Stack.Screen
-    //       name="Login"
-    //       component={LoginScreen}
-    //       // initialParams={{ user: 'me' }}
-    //     />
-    //       <Stack.Screen
-    //       name="Register"
-    //       component={RegisterScreen}
-    //       // initialParams={{ user: 'me' }}
-    //     />
-    //     <Stack.Screen
-    //       name="Sparked"
-    //       component={AppTabs}
-    //       // initialParams={{ user: 'me' }}
-    //     />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
+//   render(){
+  
+//     return(
+//       // trying to do...
+//       <NavigationContainer>
+//         <Stack.Navigator
+//           initialRouteName="Loading"
+//           navigationOptions={{header: () => null}}
+//         >
+//           <Stack.Screen
+//             name="Loading"
+//             component={LoadingScreen}
+//           />
+//           <Stack.Screen
+//             name="Login"
+//             component={LoginScreen}
+//           />
+//             <Stack.Screen
+//             name="Register"
+//             component={RegisterScreen}
+//           />
+//           <Stack.Screen
+//             name="Sparked"
+//             component={AppTabs}
+//           />
+//         </Stack.Navigator>
+//       </NavigationContainer>
+      
+//     );
+//   }; }
+  
 
-// old stack nav for auth, directs to single component once logged in v4
+// old stack nav for auth, directs to single component (AppTabs) once logged in v4
+
 //navivation once logged in 
 const LoginedStack = createStackNavigator({
   // fix here 
