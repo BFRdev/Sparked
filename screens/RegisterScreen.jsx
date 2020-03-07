@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Dimensions}
 import { LinearGradient } from 'expo-linear-gradient';
 import logo from '../assets/Logo.png';
 
-import firebase from '../firebase'
+import firebase from '../servers/firebase'
 
 const screenWidth = Dimensions.get('screen').width;
 
