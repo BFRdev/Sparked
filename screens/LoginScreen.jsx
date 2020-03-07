@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Dimensions } from 'react-native'
-import firebase from '../firebase';
+import firebase from '../servers/firebase';
 import { LinearGradient } from 'expo-linear-gradient';
 import logo from '../assets/Logo.png';
 
