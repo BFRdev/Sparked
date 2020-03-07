@@ -1,19 +1,26 @@
 import React from 'react'
 import { Center } from '../components/Center'
-import { Text, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native'
+import { Text, TouchableOpacity, SafeAreaView, StyleSheet, FlatList, View } from 'react-native'
+
+import GoalsList from '../components/goalList';
 
 
-export const GoalsScreen = ({ }) => {
+export const GoalsScreen = ({navigation}) => {
+
     return (
         <SafeAreaView style={styles.container}>
             {/* header title */}
-            <Text style={styles.goalText}>Your Goals</Text>
+            <Text style={styles.goalText}> Your Goals</Text>
             {/* add goal button goto stack */}
-            <TouchableOpacity onPress={() => console.log('tap')}>
-                <Text style={styles.addBtn}>+</Text>
+            <TouchableOpacity onPress={()=> navigation.push("AddGoal")} >
+                <Text style={styles.addBtn}> + </Text>
             </TouchableOpacity>
+
+            {/* goal list component */}
+            <GoalsList />
         </SafeAreaView>
     );
+
 }
 
 

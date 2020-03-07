@@ -4,6 +4,8 @@ import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-na
 import firebase from '../firebase';
 import { Center } from '../components/Center'
 
+import {GoalsList} from '../components/goalList'; 
+
 //news feed page of user 
 export default class ProfileScreen extends React.Component {
     
@@ -34,6 +36,7 @@ export default class ProfileScreen extends React.Component {
                 <TouchableOpacity style={{ marginTop: 32 }} onPress={this.signOutUser}>
                     <Text>Logout</Text>
                 </TouchableOpacity>
+           
             </Center>
            
         );
