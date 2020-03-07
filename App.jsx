@@ -11,8 +11,11 @@ import RegisterScreen from './screens/RegisterScreen';
 import CategorySignin from './screens/CategorySignin';
 import FeedScreen from './screens/FeedScreen';
 
+
 // tab navigator 
-import { AppTabs } from './AppTabs';
+import  AppTabs  from './AppTabs';
+
+
 
 // const Stack = createStackNavigator()
 
@@ -64,7 +67,7 @@ const LoginedStack = createStackNavigator({
 }
 );
 
-// //auth navigation
+// // //auth navigation
 const AuthStack = createStackNavigator({
   Login: LoginScreen,
   Register: RegisterScreen,
