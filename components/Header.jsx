@@ -6,9 +6,12 @@ export const Header = ({ children }) => {
     return (
         <View
             style={{
-                flex: 1,
+                flex: 0,
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                flexDirection:'row', 
+                flexWrap:'wrap', 
+                paddingTop: 10,                
             }}>
             {children}
         </View>
