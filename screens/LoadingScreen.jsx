@@ -1,6 +1,6 @@
 import React from 'react'
 import {Text, ActivityIndicator} from 'react-native'
-import firebase from '../servers/firebase'
+import firebase from '../firebase'
 import { Center } from '../components/Center';
 
 export default class LoadingScreen extends React.Component {

@@ -1,8 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux';
-import { goalUpdate } from '../actions/GoalActions';
 import { Text, Button, TextInput, KeyboardAvoidingView, SafeAreaView, Picker, View, StyleSheet } from 'react-native';
-
 
 export class AddGoalList extends React.Component {
 

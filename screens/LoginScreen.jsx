@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Dimensions, KeyboardAvoidingView } from 'react-native'
-import firebase from '../servers/firebase';
+import firebase from '../firebase';
 import { LinearGradient } from 'expo-linear-gradient';
 import logo from '../assets/Logo.png';
 
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
         resizeMode: 'center',
         justifyContent: "center",
         marginHorizontal: -310,
-        marginTop: 0,
+        marginTop: 1,
         marginBottom: -100
     },
     greeting: {
