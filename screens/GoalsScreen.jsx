@@ -26,7 +26,6 @@ export const GoalsScreen = ({ navigation }) => {
                 </TouchableOpacity>
             </Header>
 
-
             {/* goal list component */}
             <GoalsList />
         </SafeAreaView>
