@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons, MaterialIcons, FontAwesome } from '@expo/vector-icons';
 
 //import screens for tabs navigator
-import  {GoalsScreen}  from './screens/GoalsScreen';
+import  GoalsStack  from './screens/GoalsScreen';
 import { FeedScreen } from './screens/FeedScreen';
 import { SearchScreen } from './screens/SearchScreen';
 import ProfileScreen from './screens/ProfileScreen';
@@ -49,7 +49,7 @@ export default class AppTabs extends React.Component {
                     }}
                 >
                     {/* screen routes */}
-                    <Tabs.Screen name='Goals' component={GoalsScreen} />
+                    <Tabs.Screen name='Goals' component={GoalsStack} />
                     <Tabs.Screen name='Feed' component={FeedScreen} />
                     <Tabs.Screen name='Launch' component={LaunchScreen} />
                     <Tabs.Screen name='Search' component={SearchScreen} />

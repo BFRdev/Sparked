@@ -1,9 +1,8 @@
-import React from 'react'
-import { View } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
-// center align container
-
-export const Center = ({ children }) => {
+// Header component 
+export const Header = ({ children }) => {
     return (
         <View
             style={{
