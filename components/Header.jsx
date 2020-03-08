@@ -11,7 +11,8 @@ export const Header = ({ children }) => {
                 justifyContent: 'center',
                 flexDirection:'row', 
                 flexWrap:'wrap', 
-                paddingTop: 10,                
+                paddingTop: 10,   
+                fontSize: 25,             
             }}>
             {children}
         </View>

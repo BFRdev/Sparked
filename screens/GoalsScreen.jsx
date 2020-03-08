@@ -4,8 +4,11 @@ import { Text, TouchableOpacity, SafeAreaView, StyleSheet, FlatList, View, Butto
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import {Header} from '../components/Header';
+
+// import screens
 import GoalsList from '../components/goalList';
-import { AddGoalScreen } from './AddGoalScreen';
+
+import {AddGoalScreen} from './AddGoalScreen';
 
 const Stack = createStackNavigator();
 

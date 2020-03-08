@@ -14,6 +14,7 @@ export default class RegisterScreen extends React.Component {
        static navigationOptions = {
         headerShown: false,
       };
+      
     state = {
         name: "",
         email: "",
