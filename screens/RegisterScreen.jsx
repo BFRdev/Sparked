@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Dimensions} from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Dimensions,KeyboardAvoidingView} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 import logo from '../assets/Logo.png';
 
@@ -24,7 +24,7 @@ export default class RegisterScreen extends React.Component {
     };
 
     // sign up function 
-    handleSignUp = (navigation) => {
+    handleSignUp = ({navigation}) => {
         firebase
         .auth()
         .createUserWithEmailAndPassword(this.state.email, this.state.password)
@@ -39,7 +39,7 @@ export default class RegisterScreen extends React.Component {
     // render on screen
     render() {
         return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView style={styles.container}>
                 <LinearGradient
                 colors={['#1893A3', '#0D52BA']}
                 style={styles.container }>
@@ -110,7 +110,7 @@ export default class RegisterScreen extends React.Component {
                         </Text>
                     </TouchableOpacity>
                 </LinearGradient>
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 

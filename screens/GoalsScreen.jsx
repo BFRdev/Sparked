@@ -2,8 +2,7 @@ import React from 'react'
 import { Center } from '../components/Center'
 import { Text, TouchableOpacity, SafeAreaView, StyleSheet, FlatList, View, Button } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
-import {Header} from '../components/Header';
+import {Header} from '../components/inLine';
 
 // import screens
 import GoalsList from '../components/goalList';
