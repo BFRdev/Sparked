@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Button, TextInput, KeyboardAvoidingView, SafeAreaView, Picker, View, StyleSheet } from 'react-native';
+import { Text, Button, TextInput, KeyboardAvoidingView, SafeAreaView, Picker, View, StyleSheet, FlatList } from 'react-native';
 import firebase from '../firebase';
 
 // initallize firebase realtime db 
@@ -95,6 +95,16 @@ export class AddGoalList extends React.Component {
                     {/* nav back to My Goal list */}
                     <Button title="add goal" onPress={this.onGoal.bind(this)} />
 
+                    {/* TEST
+                    <FlatList data={this.state.listArray} 
+                       renderItem={({ item }) => {
+                           return(
+                           <Text style={{fontSize: 20}}>{item.listArray}</Text>
+                           );
+                       }}
+                    ></FlatList>  */}
+
+
                 </SafeAreaView>
             </KeyboardAvoidingView>
 
@@ -109,6 +119,8 @@ export const AddGoalScreen = ({ navigation }) => {
         <View>
             {/* add goal component (inputs) */}
             <AddGoalList />
+
+            
 
         </View>
 

@@ -4,11 +4,11 @@ import { Text, TouchableOpacity, SafeAreaView, StyleSheet, FlatList, View, Butto
 import { createStackNavigator } from '@react-navigation/stack';
 import {Header} from '../components/inLine';
 
-// import screens
+// import screens / components 
 import GoalsList from '../components/goalList';
-
 import {AddGoalScreen} from './AddGoalScreen';
 
+// new stack nav list <=> imput
 const Stack = createStackNavigator();
 
 
@@ -26,8 +26,9 @@ export const GoalsScreen = ({ navigation }) => {
                 </TouchableOpacity>
             </Header>
 
-            {/* goal list component */}
-            <GoalsList />
+           {/* list goes here */}
+
+          
         </SafeAreaView>
     );
 
