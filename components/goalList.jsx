@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity, FlatList, View } from 'react-native';
-import Center from './Center'
+import { StyleSheet, Text, SafeAreaView, FlatList, View } from 'react-native';
 import Constants from 'expo-constants';
 
 const DATA = [

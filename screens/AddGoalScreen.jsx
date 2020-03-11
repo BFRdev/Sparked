@@ -1,5 +1,11 @@
-import React from 'react'
-import { Text, Button, TextInput, KeyboardAvoidingView, SafeAreaView, Picker, View, StyleSheet } from 'react-native';
+import React from 'react';
+import { Text, Button, TextInput, KeyboardAvoidingView, SafeAreaView, Picker, View, StyleSheet, FlatList } from 'react-native';
+import firebase from '../firebase';
+
+// initallize firebase realtime db 
+const rootRef = firebase.database().ref();
+const goalsRef = rootRef.child('GoalList')
+
 
 export class AddGoalList extends React.Component {
 
@@ -7,16 +13,52 @@ export class AddGoalList extends React.Component {
     constructor(props) {
         super(props)
 
+        // set inital values
         this.state = {
+            listArray: [],
             goal: '',
-            category: '',
+            category: 'Fitness',
             why: '',
         }
     }
-    render() {
-        
-        return (
 
+    //triggers rerendering, put values in a JSON array
+    componentDidMount() {
+        goalsRef.on('value', childSnapshot => {
+            const listArray = [];
+            childSnapshot.forEach((doc) => {
+                listArray.push({
+                    key: doc.key,
+                    fireList: doc.toJSON().fireList
+                });
+                this.setState({
+                    listArray: listArray,
+                });
+            });
+        });
+    }
+
+
+    // when button pressed... 
+    onGoal({ navigation }) {
+        // if form empty alert user
+        if (this.state.goal.trim() && this.state.category.trim() && this.state.why.trim() == '') {
+            alert("Form is blank");
+            return;
+        }
+
+        // otherwise push data to firebase
+        goalsRef.push({
+            userGoal: this.state.goal,
+            userCategory: this.state.category,
+            userWhy: this.state.why
+        });
+
+    };
+
+    render() {
+
+        return (
             // KeyboardAvoidingView ==> prevent keyboard from overlapping
             <KeyboardAvoidingView style={styles.container}>
                 <SafeAreaView>
@@ -41,14 +83,27 @@ export class AddGoalList extends React.Component {
                         <Picker.Item label="Skills" value="Skills" />
 
                     </Picker>
-            
+
                     <Text>Why did you pick this goal?</Text>
                     <TextInput placeholder="Because..." lable="Why" value={this.state.why} value={this.state.why} onChangeText={why => this.setState({ why })}></TextInput>
 
-                {/* log list in console PROOF of values passed*/}
-                {console.log(this.state.goal)}
-                {console.log(this.state.category)}
-                {console.log(this.state.why)}
+                    {/* log list in console PROOF of values passed (test only)*/}
+                    {/* {console.log(this.state.goal)}
+                    {console.log(this.state.category)}
+                    {console.log(this.state.why)} */}
+
+                    {/* nav back to My Goal list */}
+                    <Button title="add goal" onPress={this.onGoal.bind(this)} />
+
+                    {/* TEST
+                    <FlatList data={this.state.listArray} 
+                       renderItem={({ item }) => {
+                           return(
+                           <Text style={{fontSize: 20}}>{item.listArray}</Text>
+                           );
+                       }}
+                    ></FlatList>  */}
+
 
                 </SafeAreaView>
             </KeyboardAvoidingView>
@@ -64,8 +119,9 @@ export const AddGoalScreen = ({ navigation }) => {
         <View>
             {/* add goal component (inputs) */}
             <AddGoalList />
-            {/* nav back to My Goal list */}
-            <Button title="add goal" onPress={() => navigation.navigate("GoalsScreen")} />
+
+            
+
         </View>
 
 
@@ -76,7 +132,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 0,
         marginLeft: 20,
-    
+
     },
 })
 
