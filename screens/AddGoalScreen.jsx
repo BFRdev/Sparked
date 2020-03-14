@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Text, Button, TextInput, KeyboardAvoidingView, SafeAreaView, Picker, View, StyleSheet, FlatList } from 'react-native';
 import firebase from '../firebase';
 
@@ -17,47 +17,58 @@ export class AddGoalList extends React.Component {
         this.state = {
             listArray: [],
             goal: '',
-            category: 'Fitness',
+            category: 'Pick One',
             why: '',
         }
     }
 
     //triggers rerendering, put values in a JSON array
     componentDidMount() {
-        goalsRef.on('value', childSnapshot => {
+        goalsRef.on('value', (childSnapshot) => {
             const listArray = [];
             childSnapshot.forEach((doc) => {
                 listArray.push({
                     key: doc.key,
-                    fireList: doc.toJSON().fireList
+                    fireListGoal: doc.toJSON().fireListGoal,
+                    fireListCat: doc.toJSON().fireListCat,
+                    fireListWhy: doc.toJSON().fireListWhy
                 });
                 this.setState({
-                    listArray: listArray,
+                    listArray: listArray.sort((a, b) => {
+                        return (
+                            a.fireListGoal < b.fireListGoal,
+                            a.fireListCat < b.fireListCat,
+                            a.fireListWhy < b.fireListWhy
+                        );
+
+                    }),
                 });
             });
         });
     }
 
+  
 
     // when button pressed... 
-    onGoal({ navigation }) {
+    onGoal = ({}) => {
         // if form empty alert user
-        if (this.state.goal.trim() && this.state.category.trim() && this.state.why.trim() == '') {
-            alert("Form is blank");
+        if (this.state.goal.trim() && this.state.why.trim() === '') {
+            alert("Please fill form.");
             return;
         }
-
+        if ( this.state.category.valueOf() === 'Pick One'){
+            alert("Fill in all inputs.");
+            return; 
+        }
         // otherwise push data to firebase
         goalsRef.push({
-            userGoal: this.state.goal,
-            userCategory: this.state.category,
-            userWhy: this.state.why
+            fireListGoal: this.state.goal,
+            fireListCat: this.state.category,
+            fireListWhy: this.state.why
         });
-
-    };
+    }
 
     render() {
-
         return (
             // KeyboardAvoidingView ==> prevent keyboard from overlapping
             <KeyboardAvoidingView style={styles.container}>
@@ -65,47 +76,65 @@ export class AddGoalList extends React.Component {
                     <Text>Sparks your life!</Text>
 
                     {/* Goal title */}
-                    <Text>what is your goal</Text>
-                    <TextInput placeholder="my goal..." lable="Goal" value={this.state.goal} onChangeText={goal => this.setState({ goal })}></TextInput>
+                    <Text>What is your goal</Text>
+
+                    <TextInput
+                        placeholder="Enter your goal"
+                        keyboardType='default'
+                        onChangeText={
+                            (text) => {
+                                this.setState({ goal: text });
+                            }
+                        }
+                        value={this.state.goal}
+                    />
 
                     {/* pick selected cetegory */}
                     <Text>Pick a Category</Text>
                     {/* picker component */}
                     <Picker
                         selectedValue={this.state.category}
-                        onValueChange={(itemValue) => this.setState({ category: itemValue })}
-                    >
+                        onValueChange={(itemValue) => this.setState({ category: itemValue })} >                                               
+                        <Picker.Item label="Pick One" value="Pick One" />
                         <Picker.Item label="Fitness" value="Fitness" />
                         <Picker.Item label="Health" value="Health" />
                         <Picker.Item label="Travel" value="Travel" />
                         <Picker.Item label="Wealth" value="Wealth" />
                         <Picker.Item label="Creativity" value="Creativity" />
-                        <Picker.Item label="Skills" value="Skills" />
-
+                        <Picker.Item label="Skills" value="Skills" />                        
                     </Picker>
 
                     <Text>Why did you pick this goal?</Text>
-                    <TextInput placeholder="Because..." lable="Why" value={this.state.why} value={this.state.why} onChangeText={why => this.setState({ why })}></TextInput>
 
-                    {/* log list in console PROOF of values passed (test only)*/}
-                    {/* {console.log(this.state.goal)}
-                    {console.log(this.state.category)}
-                    {console.log(this.state.why)} */}
+                    <TextInput
+                        placeholder="Enter your why"
+                        keyboardType='default'
+                        onChangeText={
+                            (text) => {
+                                this.setState({ why: text });
+                            }
+                        }
+                        value={this.state.why}
+                    />
 
                     {/* nav back to My Goal list */}
                     <Button title="add goal" onPress={this.onGoal.bind(this)} />
-
-                    {/* TEST
-                    <FlatList data={this.state.listArray} 
-                       renderItem={({ item }) => {
-                           return(
-                           <Text style={{fontSize: 20}}>{item.listArray}</Text>
-                           );
-                       }}
-                    ></FlatList>  */}
-
-
                 </SafeAreaView>
+                
+                <FlatList
+                    data={this.state.listArray}
+                    renderItem={({ item, index }) => {
+                        return (
+                            <View> 
+                                <Text style={{fontSize: 30}}>{item.fireListGoal} </Text>
+                                <Text style={{fontSize: 20}}>{item.fireListCat}</Text>
+                                <Text style={{fontSize: 15}}> {item.fireListWhy}</Text>
+                            </View>
+                        );
+                    }}
+                >
+                </FlatList>
+
             </KeyboardAvoidingView>
 
         );
@@ -113,15 +142,12 @@ export class AddGoalList extends React.Component {
 }
 
 // cant use state w/ functions and cant pass navagation in class, this is solution
-export const AddGoalScreen = ({ navigation }) => {
+export const AddGoalScreen = ({ navigation, item}) => {
 
     return (
         <View>
             {/* add goal component (inputs) */}
-            <AddGoalList />
-
-            
-
+            <AddGoalList/>
         </View>
 
 
@@ -135,4 +161,3 @@ const styles = StyleSheet.create({
 
     },
 })
-
