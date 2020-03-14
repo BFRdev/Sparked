@@ -163,8 +163,8 @@ export class AddGoalList extends React.Component {
                                 <Text style={{fontSize: 25}}>Goal: {item.fireListGoal} </Text>
                                 <Text style={{fontSize: 20}}>Aspect: {item.fireListCat}</Text>
                                 <Text style={{fontSize: 15}}>Why: {item.fireListWhy}</Text>
-                                <TouchableOpacity><Text>Delete</Text></TouchableOpacity>
-                                <TouchableOpacity><Text>Post Update</Text></TouchableOpacity>
+                                <TouchableOpacity onPress={console.log('delete')}><Text>Delete</Text></TouchableOpacity>
+                                <TouchableOpacity onPress={console.log('update')}><Text>Post Update</Text></TouchableOpacity>
                             </View>
                         );
                     }}
