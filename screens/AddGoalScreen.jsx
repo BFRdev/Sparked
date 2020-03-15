@@ -1,10 +1,13 @@
-import React, {useState} from 'react';
-import { Text, Button, TextInput, KeyboardAvoidingView, SafeAreaView, Picker, View, StyleSheet, FlatList } from 'react-native';
+import React from 'react';
+import { Text, Button, TextInput, KeyboardAvoidingView, SafeAreaView, Picker, View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import firebase from '../firebase';
-
 // initallize firebase realtime db 
 const rootRef = firebase.database().ref();
 const goalsRef = rootRef.child('GoalList')
+
+import { createStackNavigator } from '@react-navigation/stack';
+const Stack = createStackNavigator();
+
 
 
 export class AddGoalList extends React.Component {
@@ -47,25 +50,27 @@ export class AddGoalList extends React.Component {
         });
     }
 
-  
 
     // when button pressed... 
-    onGoal = ({}) => {
+    onGoal = ({ }) => {
         // if form empty alert user
         if (this.state.goal.trim() && this.state.why.trim() === '') {
             alert("Please fill form.");
             return;
         }
-        if ( this.state.category.valueOf() === 'Pick One'){
+        //alert if category not picked
+        if (this.state.category.valueOf() === 'Pick One') {
             alert("Fill in all inputs.");
-            return; 
+            return;
         }
-        // otherwise push data to firebase
+        // otherwise push data to firebase and alert user goback back 
         goalsRef.push({
             fireListGoal: this.state.goal,
             fireListCat: this.state.category,
             fireListWhy: this.state.why
-        });
+        }).then(this.props.navigation.navigate('GoalsScreen'));
+        // (alert('Goal Added to your list.'));
+
     }
 
     render() {
@@ -94,14 +99,14 @@ export class AddGoalList extends React.Component {
                     {/* picker component */}
                     <Picker
                         selectedValue={this.state.category}
-                        onValueChange={(itemValue) => this.setState({ category: itemValue })} >                                               
+                        onValueChange={(itemValue) => this.setState({ category: itemValue })} >
                         <Picker.Item label="Pick One" value="Pick One" />
                         <Picker.Item label="Fitness" value="Fitness" />
                         <Picker.Item label="Health" value="Health" />
                         <Picker.Item label="Travel" value="Travel" />
                         <Picker.Item label="Wealth" value="Wealth" />
                         <Picker.Item label="Creativity" value="Creativity" />
-                        <Picker.Item label="Skills" value="Skills" />                        
+                        <Picker.Item label="Skills" value="Skills" />
                     </Picker>
 
                     <Text>Why did you pick this goal?</Text>
@@ -120,21 +125,6 @@ export class AddGoalList extends React.Component {
                     {/* nav back to My Goal list */}
                     <Button title="add goal" onPress={this.onGoal.bind(this)} />
                 </SafeAreaView>
-                
-                <FlatList
-                    data={this.state.listArray}
-                    renderItem={({ item, index }) => {
-                        return (
-                            <View> 
-                                <Text style={{fontSize: 30}}>{item.fireListGoal} </Text>
-                                <Text style={{fontSize: 20}}>{item.fireListCat}</Text>
-                                <Text style={{fontSize: 15}}> {item.fireListWhy}</Text>
-                            </View>
-                        );
-                    }}
-                >
-                </FlatList>
-
             </KeyboardAvoidingView>
 
         );
@@ -142,12 +132,12 @@ export class AddGoalList extends React.Component {
 }
 
 // cant use state w/ functions and cant pass navagation in class, this is solution
-export const AddGoalScreen = ({ navigation, item}) => {
+export const AddGoalScreen = ({ navigation }) => {
 
     return (
         <View>
             {/* add goal component (inputs) */}
-            <AddGoalList/>
+            <AddGoalList />
         </View>
 
 
@@ -157,7 +147,12 @@ export const AddGoalScreen = ({ navigation, item}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 0,
-        marginLeft: 20,
-
+        marginLeft: 5,
     },
+    list: {
+        backgroundColor: '#fff',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
+    }
 })
