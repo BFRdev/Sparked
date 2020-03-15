@@ -2,12 +2,9 @@ import React from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Dimensions,KeyboardAvoidingView} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 import logo from '../assets/Logo.png';
-
 import firebase from '../firebase'
 
 const screenWidth = Dimensions.get('screen').width;
-
-
 
 export default class RegisterScreen extends React.Component {
     // remove stack header
@@ -113,7 +110,6 @@ export default class RegisterScreen extends React.Component {
             </KeyboardAvoidingView>
         );
     }
-
 }
 
 const styles = StyleSheet.create({
