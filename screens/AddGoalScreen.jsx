@@ -1,14 +1,10 @@
 import React from 'react';
 import { Text, Button, TextInput, KeyboardAvoidingView, SafeAreaView, Picker, View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import firebase from '../firebase';
+
 // initallize firebase realtime db 
 const rootRef = firebase.database().ref();
 const goalsRef = rootRef.child('GoalList')
-
-import { createStackNavigator } from '@react-navigation/stack';
-const Stack = createStackNavigator();
-
-
 
 export class AddGoalList extends React.Component {
 
@@ -78,7 +74,8 @@ export class AddGoalList extends React.Component {
             // KeyboardAvoidingView ==> prevent keyboard from overlapping
             <KeyboardAvoidingView style={styles.container}>
                 <SafeAreaView>
-                    <Text>Sparks your life!</Text>
+                <Text>Sparks your life!</Text> 
+                    
 
                     {/* Goal title */}
                     <Text>What is your goal</Text>
@@ -123,7 +120,7 @@ export class AddGoalList extends React.Component {
                     />
 
                     {/* nav back to My Goal list */}
-                    <Button title="add goal" onPress={this.onGoal.bind(this)} />
+                    <Button title="Add Goal" onPress={this.onGoal.bind(this)} />
                 </SafeAreaView>
             </KeyboardAvoidingView>
 
@@ -148,11 +145,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 0,
         marginLeft: 5,
+        marginRight: 5,
     },
-    list: {
-        backgroundColor: '#fff',
-        padding: 20,
-        marginVertical: 8,
-        marginHorizontal: 16,
-    }
+
 })

@@ -3,17 +3,16 @@ import { Text, TouchableOpacity, SafeAreaView, StyleSheet, FlatList, View, Butto
 import { createStackNavigator } from '@react-navigation/stack';
 import { Header } from '../components/inLine';
 import { AddGoalList } from '../screens/AddGoalScreen'
-import { LaunchScreen } from './LaunchScreen'; 
+import { LaunchScreen } from './LaunchScreen';
 import firebase from '../firebase';
 const rootRef = firebase.database().ref();
-const goalsRef = rootRef.child('GoalList')
 
+const goalsRef = rootRef.child('GoalList')
 const Stack = createStackNavigator();
 
-
 export class GoalsScreen extends Component {
-      // state and defult values
-      constructor(props) {
+    // state and defult values
+    constructor(props) {
         super(props)
 
         // set inital values
@@ -25,8 +24,8 @@ export class GoalsScreen extends Component {
         }
     }
 
-       //triggers rerendering, put values in a JSON array
-       componentDidMount() {
+    //triggers rerendering, put values in a JSON array
+    componentDidMount() {
         goalsRef.on('value', (childSnapshot) => {
             const listArray = [];
             childSnapshot.forEach((doc) => {
@@ -49,6 +48,12 @@ export class GoalsScreen extends Component {
             });
         });
     }
+
+    // delete goals 
+    deleteGoal = () => {
+        rootRef.remove().then(console.log("removed"))
+    }
+
     render() {
         return (
             <SafeAreaView style={styles.container}>
@@ -67,10 +72,10 @@ export class GoalsScreen extends Component {
                     renderItem={({ item, index }) => {
                         return (
                             <View style={styles.list}>
-                                <Text style={{ fontSize: 25 }}>Goal: {item.fireListGoal} </Text>
+                                <Text style={{ fontSize: 25 }}>Goal: {item.fireListGoal}</Text>
                                 <Text style={{ fontSize: 20 }}>Aspect: {item.fireListCat}</Text>
                                 <Text style={{ fontSize: 15 }}>Why: {item.fireListWhy}</Text>
-                                <TouchableOpacity onPress={() => console.log('delete')}><Text>Delete</Text></TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.deleteGoal()}><Text>Delete</Text></TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.props.navigation.navigate('LaunchScreen')}><Text>Update</Text></TouchableOpacity>
                             </View>
                         );
@@ -99,11 +104,12 @@ export default function GoalsStack() {
                     // customize header
                     title: 'Add Sparke', headerTintColor: '#0D52BA', headerStyle: { backgroundColor: '#EF9D53' }
                 }} />
-                {/* goto launch screen */}
-                 <Stack.Screen name="LaunchScreen" component={LaunchScreen}
+            {/* goto launch screen */}
+            <Stack.Screen name="LaunchScreen" component={LaunchScreen}
                 options={{
                     // customize header
-                    headerShown:false, title: 'Update Progress', headerTintColor: '#0D52BA', headerStyle: { backgroundColor: '#EF9D53' }
+                    //headerShown: false, 
+                    title: 'Update Progress', headerTintColor: '#0D52BA', headerStyle: { backgroundColor: '#EF9D53' }
                 }} />
         </Stack.Navigator>
     );
@@ -122,11 +128,11 @@ const styles = StyleSheet.create({
         fontSize: 25,
     },
     list: {
-        backgroundColor: '#fff',
+        backgroundColor: '#EF9D53',
         padding: 20,
         marginVertical: 8,
         marginHorizontal: 16,
         shadowColor: '#0D52BA',
-        shadowOpacity: 0.5, 
+        shadowOpacity: 1.0,
     }
 }); 
