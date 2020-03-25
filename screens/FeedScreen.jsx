@@ -5,7 +5,7 @@ import { Text } from 'react-native'
 export const FeedScreen = ({}) => {
     return( 
         <Center>
-            <Text>ProfileList Screen</Text>
+            <Text>Feed Screen</Text>
         </Center>
     );
 }

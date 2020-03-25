@@ -137,8 +137,6 @@ const styles = StyleSheet.create({
         padding: 20,
         marginVertical: 8,
         marginHorizontal: 16,
-        shadowColor: '#0D52BA',
-        shadowOpacity: 1.0,
         color:'white'
     }
 }); 
