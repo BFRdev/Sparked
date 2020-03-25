@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
     },
     sparkLogo: {
         resizeMode: 'center',
+        alignItems: 'center',
         justifyContent: "center",
         marginHorizontal: -310,
         marginTop: 1,
