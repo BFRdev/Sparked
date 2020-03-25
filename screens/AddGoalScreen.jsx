@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Button, TextInput, KeyboardAvoidingView, SafeAreaView, Picker, View, StyleSheet, FlatList, TouchableOpacity, Dimensions  } from 'react-native';
+import { Text, Button, TextInput, KeyboardAvoidingView, SafeAreaView, Picker, View, StyleSheet, TouchableOpacity, Dimensions  } from 'react-native';
 import firebase from '../firebase';
 import { Header } from '../components/inLine';
 import { LinearGradient } from 'expo-linear-gradient';

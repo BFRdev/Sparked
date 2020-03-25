@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, TouchableOpacity, SafeAreaView, StyleSheet, FlatList, View, Button, KeyboardAvoidingView, TextInput, Picker } from 'react-native'
+import { Text, TouchableOpacity, SafeAreaView, StyleSheet, FlatList, View } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack';
 import { Header } from '../components/inLine';
 import { AddGoalList } from '../screens/AddGoalScreen'
