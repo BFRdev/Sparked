@@ -1,10 +1,13 @@
 import React from 'react';
-import { Text, Button, TextInput, KeyboardAvoidingView, SafeAreaView, Picker, View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { Text, Button, TextInput, KeyboardAvoidingView, SafeAreaView, Picker, View, StyleSheet, TouchableOpacity, Dimensions  } from 'react-native';
 import firebase from '../firebase';
+import { Header } from '../components/inLine';
+import { LinearGradient } from 'expo-linear-gradient';
 
 // initallize firebase realtime db 
 const rootRef = firebase.database().ref();
 const goalsRef = rootRef.child('GoalList')
+const screenWidth = Dimensions.get('screen').width;
 
 export class AddGoalList extends React.Component {
 
@@ -18,6 +21,7 @@ export class AddGoalList extends React.Component {
             goal: '',
             category: 'Pick One',
             why: '',
+            height: 0
         }
     }
 
@@ -72,15 +76,24 @@ export class AddGoalList extends React.Component {
     render() {
         return (
             // KeyboardAvoidingView ==> prevent keyboard from overlapping
-            <KeyboardAvoidingView style={styles.container}>
-                <SafeAreaView>
-                <Text>Sparks your life!</Text> 
-                    
+            <LinearGradient
+            colors={['#0D98BA', '#0D52BA']}
+            style={styles.container}>
+
+            <KeyboardAvoidingView style={styles.keyboard}
+            behavior='padding'
+            >
+                <SafeAreaView >
+                    <Header>
+                        <Text style={styles.titleText}>Adding Your Goal</Text> 
+                    </Header>
 
                     {/* Goal title */}
-                    <Text>What is your goal</Text>
+                    <Text style={styles.subTitleText}>What is your goal</Text>
 
+                    <Header>
                     <TextInput
+                        style={styles.inputText}
                         placeholder="Enter your goal"
                         keyboardType='default'
                         onChangeText={
@@ -90,13 +103,18 @@ export class AddGoalList extends React.Component {
                         }
                         value={this.state.goal}
                     />
+                    </Header>
 
                     {/* pick selected cetegory */}
-                    <Text>Pick a Category</Text>
+                    <Text style={styles.subTitleText}>What category is your Goal?</Text>
+
+                    <Header >
                     {/* picker component */}
-                    <Picker
+                    <View style={styles.pickerText}>
+                    <Picker 
                         selectedValue={this.state.category}
                         onValueChange={(itemValue) => this.setState({ category: itemValue })} >
+
                         <Picker.Item label="Pick One" value="Pick One" />
                         <Picker.Item label="Fitness" value="Fitness" />
                         <Picker.Item label="Health" value="Health" />
@@ -104,25 +122,42 @@ export class AddGoalList extends React.Component {
                         <Picker.Item label="Wealth" value="Wealth" />
                         <Picker.Item label="Creativity" value="Creativity" />
                         <Picker.Item label="Skills" value="Skills" />
+
                     </Picker>
+                    </View>
+                    </Header>
 
-                    <Text>Why did you pick this goal?</Text>
+                    <Text style={styles.subTitleText}>Describe Your Goal:</Text>
 
+                    <Header>
                     <TextInput
-                        placeholder="Enter your why"
+                        style={styles.descriptonText}
+                        multiline={true}
+                        numberOfLines={10}
+                        placeholder="My goal is about..."
                         keyboardType='default'
+                        disableFullscreenUI 
                         onChangeText={
                             (text) => {
                                 this.setState({ why: text });
-                            }
-                        }
+                            }}onContentSizeChange={(event) => {
+                                this.setState({ height: event.nativeEvent.contentSize.height })
+                            }}
+                        style={[styles.descriptonText, {height: Math.max(35, this.state.height)}]}
                         value={this.state.why}
                     />
+                    </Header>
 
                     {/* nav back to My Goal list */}
-                    <Button title="Add Goal" onPress={this.onGoal.bind(this)} />
+                    <Header>
+                    <TouchableOpacity style={styles.addingButton} onPress={this.onGoal.bind(this)}>
+                    <Header><Text style={{ fontSize: 20, color: "#FFF" }}>Add</Text></Header>
+                    </TouchableOpacity>
+                    </Header>
+
                 </SafeAreaView>
             </KeyboardAvoidingView>
+            </LinearGradient>
 
         );
     }
@@ -143,9 +178,72 @@ export const AddGoalScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 0,
-        marginLeft: 5,
-        marginRight: 5,
+        flex: 1,
+        paddingLeft: 5,
+        paddingRight: 5,
+        color: 'white'
     },
+    keyboard: {
+       flex:1
+    },
+    text: {
+        color: 'white'
+    },
+    titleText: {
+        color: 'white',
+        fontSize: 28,
+        paddingBottom:35
+    },
+    subTitleText: {
+        color: 'white',
+        fontSize: 20,
+        paddingLeft:12.5
+    },
+    inputText: {
+        backgroundColor: '#FFF',
+        borderRadius: 15,
+        borderColor: '#EF9D53',
+        borderWidth: 3,
+        marginBottom:10,       
+        marginTop: 2.5,
+        padding: 10,
+        height: 50,
+        width: screenWidth / 1.2,
+        fontSize: 15,
+        color: 'black',        
+    },
+    pickerText: {
+        backgroundColor: '#FFF',
+        borderRadius: 15,
+        borderColor: '#EF9D53',
+        borderWidth: 3,
+        marginTop: 2.5,
+        marginBottom:10,   
+        paddingBottom: 20,    
+        height: 50,
+        width: screenWidth / 1.2,
+        fontSize: 15,
+        color: 'black',        
+    },
+    descriptonText: {
+        backgroundColor: '#FFF',
+        borderRadius: 15,
+        borderColor: '#EF9D53',
+        borderWidth: 3,
+        marginBottom:10,       
+        marginTop: 2.5,
+        padding: 20,
+      
+        width: screenWidth / 1.2,
+        fontSize: 15,
+        color: 'black',        
+    },
+    addingButton: {
+        width: 200,
+        height:50,
+        marginTop: 50,
+        backgroundColor: "#EF9D53",
+        borderRadius: 25,
+    }
 
 })
