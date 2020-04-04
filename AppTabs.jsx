@@ -9,7 +9,7 @@ import  GoalsStack  from './screens/GoalsScreen';
 import { FeedScreen } from './screens/FeedScreen';
 import { SearchScreen } from './screens/SearchScreen';
 import ProfileScreen from './screens/ProfileScreen';
-import  LaunchStack  from './screens/LaunchScreen';
+import { LaunchScreen }  from './screens/LaunchScreen';
 
 //const Stack = createStackNavigator()
 const Tabs = createBottomTabNavigator()
@@ -51,7 +51,7 @@ export default class AppTabs extends React.Component {
                     {/* screen routes */}
                     <Tabs.Screen name='Goals' component={GoalsStack} />
                     <Tabs.Screen name='Feed' component={FeedScreen} />
-                    <Tabs.Screen name='Launch' component={LaunchStack} />
+                    <Tabs.Screen name='Launch' component={LaunchScreen} />
                     <Tabs.Screen name='Search' component={SearchScreen} />
                     <Tabs.Screen name='Profile' component={ProfileScreen} />
                 </Tabs.Navigator>

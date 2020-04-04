@@ -1,13 +1,13 @@
 import React from 'react';
-import { Text, Button, TextInput, KeyboardAvoidingView, SafeAreaView, Picker, View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { Text, Button, TextInput, KeyboardAvoidingView, Picker, View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import firebase from '../firebase';
 import { Header } from '../components/inLine';
 import { LinearGradient } from 'expo-linear-gradient';
-
 // initallize firebase realtime db 
-const rootRef = firebase.database().ref();
-const goalsRef = rootRef.child('GoalList')
+const rootRef = firebase.database().ref('GoalList');
+
 const screenWidth = Dimensions.get('screen').width;
+
 
 export class AddGoalList extends React.Component {
 
@@ -16,18 +16,19 @@ export class AddGoalList extends React.Component {
         super(props)
 
         // set inital values
-        this.state = {
+        this.state = ({
             listArray: [],
             goal: '',
             category: 'Pick One',
             why: '',
             height: 0
-        }
+        }); 
     }
 
     //triggers rerendering, put values in a JSON array
     componentDidMount() {
-        goalsRef.on('value', (childSnapshot) => {
+
+        rootRef.on('value', (childSnapshot) => {
             const listArray = [];
             childSnapshot.forEach((doc) => {
                 listArray.push({
@@ -63,13 +64,13 @@ export class AddGoalList extends React.Component {
             alert("Fill in all inputs.");
             return;
         }
+       
         // otherwise push data to firebase and alert user goback back 
-        goalsRef.push({
+        rootRef.push({
             fireListGoal: this.state.goal,
             fireListCat: this.state.category,
             fireListWhy: this.state.why
         }).then(this.props.navigation.navigate('GoalsScreen'));
-
     }
 
     render() {
@@ -121,9 +122,10 @@ export class AddGoalList extends React.Component {
                         </View>
                     </Header>
 
+
                     {/* goal discription */}
                     <Text style={styles.subTitleText}>Describe Your Goal:</Text>
-                    
+
                     <Header>
                         <TextInput
                             style={styles.descriptonText}
@@ -135,11 +137,12 @@ export class AddGoalList extends React.Component {
                             onChangeText={
                                 (text) => {
                                     this.setState({ why: text });
-                                }} onContentSizeChange={(event) => {
+                                }} 
+                                onContentSizeChange={(event) => {
                                     this.setState({ height: event.nativeEvent.contentSize.height })
                                 }}
-                            style={[styles.descriptonText, { height: Math.max(35, this.state.height) }]}
-                            value={this.state.why}
+                             style={[styles.descriptonText, { height: Math.max(35, this.state.height) }]}
+                             value={this.state.why}
                         />
                     </Header>
 

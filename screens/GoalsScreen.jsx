@@ -5,30 +5,33 @@ import { Header } from '../components/inLine';
 import { AddGoalList } from '../screens/AddGoalScreen'
 import { LaunchScreen } from './LaunchScreen';
 import firebase from '../firebase';
+
 import { LinearGradient } from 'expo-linear-gradient';
 
-const rootRef = firebase.database().ref();
+const rootRef = firebase.database().ref('GoalList/');
 
-const goalsRef = rootRef.child('GoalList')
+
 const Stack = createStackNavigator();
 
 export class GoalsScreen extends Component {
-    // state and defult values
-    constructor(props) {
-        super(props)
+  // state and defult values
+  constructor(props) {
+    super(props)
 
-        // set inital values
-        this.state = {
-            listArray: [],
-            goal: '',
-            category: 'Pick One',
-            why: '',
-        }
-    }
+    // set inital values
+    this.state = ({
+        listArray: [],
+        goal: '',
+        category: 'Pick One',
+        why: '',
+        height: 0
+    }); 
+}
 
     //triggers rerendering, put values in a JSON array
     componentDidMount() {
-        goalsRef.on('value', (childSnapshot) => {
+
+        rootRef.on('value', (childSnapshot) => {
             const listArray = [];
             childSnapshot.forEach((doc) => {
                 listArray.push({
@@ -36,7 +39,7 @@ export class GoalsScreen extends Component {
                     fireListGoal: doc.toJSON().fireListGoal,
                     fireListCat: doc.toJSON().fireListCat,
                     fireListWhy: doc.toJSON().fireListWhy
-                });
+                }); 
                 this.setState({
                     listArray: listArray.sort((a, b) => {
                         return (
@@ -49,12 +52,15 @@ export class GoalsScreen extends Component {
                 });
             });
         });
-    }
+    };
 
-    // delete goals 
+    // delete goals ERROR deletes all records. 
     deleteGoal = () => {
-        rootRef.remove().then(console.log("removed"))
-    }
+        // const goalsRef = rootRef.child('key');     
+        //     rootRef.child('GoalList/' + key).remove(); 
+            console.log("removed"); 
+
+    };
 
     render() {
         return (
@@ -72,7 +78,7 @@ export class GoalsScreen extends Component {
                             </TouchableOpacity>
 
                     </Header>
-
+                        {/* {console.log(this.state.listArray)} */}
                     <FlatList
                     data={this.state.listArray}
                     renderItem={({ item, index }) => {
@@ -81,12 +87,12 @@ export class GoalsScreen extends Component {
                                 <Text style={{ fontSize: 35, color:'white' }}>Goal: {item.fireListGoal}</Text>
                                 <Text style={{ fontSize: 20, color:'white' }}>Aspect: {item.fireListCat}</Text>
                                 <Text style={{ fontSize: 15, color:'white' }}>Why: {item.fireListWhy}</Text>
-                                <TouchableOpacity onPress={() => this.deleteGoal()}><Text style={{ color:'white' }}>Delete</Text></TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('LaunchScreen')}><Text style={{ color:'white' }}>Update</Text></TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.deleteGoal() }><Text style={{ color:'white' }}>Delete</Text></TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('LaunchScreen')}><Text style={{ color:'white' }}>Post Update</Text></TouchableOpacity>
                             </View>
                             );
-                        }}>
-                    </FlatList>
+                        }} keyExtractor={({item}, index) => index.toString()}>
+                </FlatList>
                 </SafeAreaView>
             </LinearGradient>
         );
@@ -128,10 +134,12 @@ const styles = StyleSheet.create({
     addBtn: {
         fontSize: 40,
         color: 'white',
+        shadowColor: '#0D52BA',
+        shadowOpacity: 0.5,
     },
     goalText: {
         fontSize: 25,
-        color:'white'
+        color:'white',
     },
     list: {
         padding: 20,
