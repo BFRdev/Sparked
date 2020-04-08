@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from 'react'
 import { FlatList, View, TouchableOpacity, Text, StyleSheet, SafeAreaView } from 'react-native';
-import { Header } from '../components/inLine';
+import * as Animatable from 'react-native-animatable';
 import { Video } from 'expo-av';
 import firebase from '../firebase'
+import { Center } from '../components/Center';
 const videoRef = firebase.database().ref('videoCollaction');
 
 export const FeedScreen = ({ }) => {
@@ -37,27 +38,31 @@ export const FeedScreen = ({ }) => {
 
         return (
             // data layout 
-            <SafeAreaView>
-               
-                {/* <Text>key: {item.key}</Text> */}
-                <Text>Video: </Text>
-                {/* <Text>video: {item.video.uri}</Text> */}
-                <Video
-                    source={{ uri: item.video.uri }}
-                    shouldPlay
-                    isMuted
-                    resizeMode="cover"
-                    style={{ width: 300, height: 300 }}
-                    useNativeControls={true}
-                    isLooping={true}
-                />
-              <TouchableOpacity onPress={() => console.log('pressed')}><Text style={{ color:'blue' }}>Button</Text></TouchableOpacity>
+            <SafeAreaView style={styles.container}>
+                {/* video container added animation*/}
+                <Animatable.View style={styles.box} animation="slideInDown" easing="ease">
+                    <Text style={styles.title}>Spark</Text>
+                    <Center>
+                        <Video 
+                            source={{ uri: item.video.uri }}
+                            shouldPlay
+                            isMuted
+                            resizeMode="cover"
+                            style={styles.videoBox}
+                            useNativeControls={true}
+                            isLooping={true}
+                        />
+                    </Center>
+                <TouchableOpacity onPress={() => console.log('pressed')}><Text style={styles.btn}>Applaud👏</Text></TouchableOpacity>
+                
+              </Animatable.View>
             </SafeAreaView>
         );
     };
 
     return (
         <View style={styles.container}>
+            
             {/* render videos in a flat list */}
             <FlatList
                 data={videoArray} // The state data
@@ -68,40 +73,54 @@ export const FeedScreen = ({ }) => {
     );
 };
 
-// return (
-//     <SafeAreaView>
-//         <Text>Feed Screen</Text>
-//         {/* array values here */}
-
-// <FlatList
-//         data={videoArray}
-//         renderItem={({ item, index }) => {
-//             return (
-//                 <View>
-//                     <Text style={{ fontSize: 25, color:'red' }}>Goal</Text>
-//                     <Video
-//                         source={{ uri: 'file:///var/mobile/Containers/Data/Application/6D4BF03E-4E53-481A-AF86-55C6B702B6B0/Library/Caches/ExponentExperienceData/%2540ameer_devking%252Fspark-app/Camera/BADB80A8-27E9-4BDD-9779-81CC356B6F93.mov'}}
-//                         // shouldPlay={shouldPlay}
-//                         // isMuted={mute}
-//                         resizeMode="cover"
-//                         style={{ width: 300, height: 300 }}
-//                         useNativeControls={true}
-//                         isLooping={true}
-//                     />
-
-//                     <TouchableOpacity onPress={() => console.log('pressed')}><Text style={{ color:'blue' }}>Button</Text></TouchableOpacity>
-//                 </View>
-//                 );
-//             }} keyExtractor={({item}, index) => index.toString()}>
-//     </FlatList>
-
-//    // );
-//}
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginLeft: 10,
         marginRight: 10,
-    }
+    },
+    box: {
+        width: "100%",
+        padding: 30,
+        marginTop: 20,
+        marginBottom: 20,
+        color: 'white',
+        backgroundColor: '#0D52BA',
+        borderRadius: 10,
+        //shadow depth
+        shadowColor: "#EF9D53",
+        shadowOffset: {
+            width: 4,
+            height: 4,
+        },
+        shadowOpacity: 0.7,
+        shadowRadius: 5.46,
+        elevation: 4,
+    },
+
+    //list items 
+    videoBox: {
+        width: 300,
+        height: 300,
+        marginTop: 10,
+    },
+
+    title: {
+        fontSize: 20,
+        color: 'white',
+    },
+
+    desc: {
+        fontSize: 15,
+        paddingBottom: 10,
+        color: 'white',
+    },
+
+    btn: {
+        marginTop: 10,
+        marginLeft: 10,
+        fontSize: 20,
+        color: '#EF9D53',
+    },
 });

@@ -141,7 +141,7 @@ export class AddGoalList extends React.Component {
                                 onContentSizeChange={(event) => {
                                     this.setState({ height: event.nativeEvent.contentSize.height })
                                 }}
-                             style={[styles.descriptonText, { height: Math.max(35, this.state.height) }]}
+                             style={[styles.descriptonText, { height: Math.max(70, this.state.height) }]}
                              value={this.state.why}
                         />
                     </Header>
