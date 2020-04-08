@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import { Text, TouchableOpacity, SafeAreaView, StyleSheet, FlatList, View } from 'react-native'
+import React, { Component } from 'react';
+import { Text, TouchableOpacity, SafeAreaView, StyleSheet, FlatList, View } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Header } from '../components/inLine';
 import { AddGoalList } from '../screens/AddGoalScreen'
@@ -56,8 +57,7 @@ export class GoalsScreen extends Component {
 
     // delete goals ERROR deletes all records. 
     deleteGoal = () => {
-        // const goalsRef = rootRef.child('key');     
-        //     rootRef.child('GoalList/' + key).remove(); 
+        rootRef.child('GoalList/').remove(); 
             console.log("removed"); 
 
     };
@@ -83,13 +83,13 @@ export class GoalsScreen extends Component {
                     data={this.state.listArray}
                     renderItem={({ item, index }) => {
                         return (
-                            <View style={styles.list}>
+                            <Animatable.View style={styles.list}  animation="zoomInDown" easing="ease-out">
                                 <Text style={{ fontSize: 35, color:'white' }}>Goal: {item.fireListGoal}</Text>
                                 <Text style={{ fontSize: 20, color:'white' }}>Aspect: {item.fireListCat}</Text>
                                 <Text style={{ fontSize: 15, color:'white' }}>Why: {item.fireListWhy}</Text>
-                                <TouchableOpacity onPress={() => this.deleteGoal() }><Text style={{ color:'white' }}>Delete</Text></TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('LaunchScreen')}><Text style={{ color:'white' }}>Post Update</Text></TouchableOpacity>
-                            </View>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('LaunchScreen')}><Text style={{ color:'#ef9d53', fontWeight:'bold' }}>Post Update</Text></TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.deleteGoal() }><Text style={{ color:'#ed2828' }}>Delete</Text></TouchableOpacity>
+                            </Animatable.View>
                             );
                         }} keyExtractor={({item}, index) => index.toString()}>
                 </FlatList>
@@ -129,13 +129,19 @@ export default function GoalsStack() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor:'red'
     },
     addBtn: {
         fontSize: 40,
         color: 'white',
-        shadowColor: '#0D52BA',
+        shadowColor: "#0D52BA",
+        shadowOffset: {
+            width: 5,
+            height: 5,
+        },
         shadowOpacity: 0.5,
+        shadowRadius: 3,
+
+        elevation: 10,
     },
     goalText: {
         fontSize: 25,
@@ -145,6 +151,8 @@ const styles = StyleSheet.create({
         padding: 20,
         marginVertical: 8,
         marginHorizontal: 16,
-        color:'white'
+        color:'white',
+        backgroundColor: '#0D52BA',
+        borderRadius: 10, 
     }
 }); 

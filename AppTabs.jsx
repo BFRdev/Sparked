@@ -7,7 +7,7 @@ import { Ionicons, MaterialIcons, FontAwesome } from '@expo/vector-icons';
 //import screens for tabs navigator
 import  GoalsStack  from './screens/GoalsScreen';
 import { FeedScreen } from './screens/FeedScreen';
-import { SearchScreen } from './screens/SearchScreen';
+import SearchStack from './screens/SearchScreen'; 
 import ProfileScreen from './screens/ProfileScreen';
 import { LaunchScreen }  from './screens/LaunchScreen';
 
@@ -52,7 +52,7 @@ export default class AppTabs extends React.Component {
                     <Tabs.Screen name='Goals' component={GoalsStack} />
                     <Tabs.Screen name='Feed' component={FeedScreen} />
                     <Tabs.Screen name='Launch' component={LaunchScreen} />
-                    <Tabs.Screen name='Search' component={SearchScreen} />
+                    <Tabs.Screen name='Search' component={SearchStack} />
                     <Tabs.Screen name='Profile' component={ProfileScreen} />
                 </Tabs.Navigator>
             </NavigationContainer>
