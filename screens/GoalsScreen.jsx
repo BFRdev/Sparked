@@ -154,5 +154,14 @@ const styles = StyleSheet.create({
         color:'white',
         backgroundColor: '#0D52BA',
         borderRadius: 10, 
+          //shadow depth
+          shadowColor: "#000",
+          shadowOffset: {
+              width: 3,
+              height: 3,
+          },
+          shadowOpacity: 0.5,
+          shadowRadius: 5.46,
+          elevation: 4,
     }
 }); 
