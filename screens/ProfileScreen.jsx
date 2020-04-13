@@ -1,11 +1,14 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, Image, ScrollView } from 'react-native';
 import firebase from '../firebase';
 import { Center } from '../components/Center'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Animatable from 'react-native-animatable';
 import image2 from '../assets/fitimg2.jpg';
+import trophy from '../assets/trophy-icon-1.png';
+import badge from '../assets/achievment-icon.png';
+import { Reducer } from 'react-native-router-flux';
 
 //news feed page of user 
 export default class ProfileScreen extends React.Component {
@@ -38,78 +41,76 @@ export default class ProfileScreen extends React.Component {
                 style={{ flex: 1 }}>
 
                 <SafeAreaView style={styles.container}>
-
-                    <Image
-                        style={styles.logo}
-                        source={require('../assets/user.png')}
-
-                    />
-                    <View style={{ flexDirection: "row", justifyContent: "center" }}>
-                        <Text style={styles.userName}>
-                            @MCHAYA_14
-                         </Text>
-
-                        <Text style={styles.level}>
-                            LV.2
-                    </Text>
-                    </View>
-
-                    <View style={{ flexDirection: "row", justifyContent: "center" }}>
-                        <Text style={styles.editProfile}>
-                            Edit Profile
-                    </Text>
-
-                        <Text style={styles.points}>
-                            Points:4
-                    </Text>
-                        {/* log out func */}
-                        <TouchableOpacity style={{ marginTop: 32 }} onPress={this.signOutUser}>
-                            <Text style={{ color: 'red',}}>Logout</Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={{ flexDirection: "row", justifyContent: "center" }}>
-                        <View style={styles.trophyBorder}>
-                            <Image
-                                style={styles.trophy}
-                                source={require('../assets/trophy-icon-1.png')}
-
-                            />
-                        </View>
+                    <ScrollView>
 
                         <Image
-                            style={styles.badge}
-                            source={require('../assets/achievment-icon.png')}
+                            style={styles.logo}
+                            source={require('../assets/user.png')}
 
                         />
-                    </View>
+                        <View style={{ flexDirection: "row", justifyContent: "center" }}>
+                            <Text style={styles.userName}>
+                                @MCHAYA_14
+                            </Text>
 
-                    <View style={styles.goalsAccomplished}>
-                        <Text style={styles.goalsText}>
-                            Goals Accomplished: 1
+                            <Text style={styles.level}>
+                                LV.2
                         </Text>
-                    </View>
+                        </View>
 
-                    {/* video container added animation*/}
-                    <View>
-                        <Animatable.View style={styles.box} animation="bounceIn" easing="ease">
+                        <View style={{ flexDirection: "row", justifyContent: "center", marginBottom:30, }}>
+                            <Text style={styles.editProfile}>
+                                Edit Profile
+                        </Text>
 
-                            <Text style={styles.title}>Weight Loss</Text>
-                            <Center>
+                            <Text style={styles.points}>
+                                Points: 4
+                        </Text>
+                        </View>
+                            {/* log out func */}
+                            <TouchableOpacity style={{ backgroundColor: '#E53A3A' , marginHorizontal:140, paddingVertical:5, borderRadius:10}} onPress={this.signOutUser}>
+        <Text style={{ color: 'white',textAlign:'center', }}>Logout</Text>
+                            </TouchableOpacity>
+
+                        
+
+                        <View style={{ flexDirection: "row", justifyContent: "center" }}>
+                            <View style={styles.trophyBorder}>
                                 <Image
-                                    style={{ width: 200, height: 150 }}
-                                    source={image2}
+                                    style={styles.trophy}
+                                    source={trophy}
+
                                 />
-                            </Center>
+                            </View>
+                            <View style={styles.badgeBorder}>
+                                <Image
+                                    style={styles.badge}
+                                    source={badge}
 
+                                />
+                            </View>    
+                        </View>
 
-                            <Text style={{ color: 'white', paddingLeft: 80 }}>Goal Completed <FontAwesome5 name={'check'} solid /></Text>
-                        </Animatable.View>
-                    </View>
+                        <View style={styles.goalsAccomplished}>
+                            <Text style={styles.goalsText}>
+                                Goals Accomplished: 1
+                            </Text>
+                        </View>
 
-
-
-
+                        {/* video container added animation*/}
+                        <View>
+                            <Animatable.View style={styles.box} animation="bounceIn" easing="ease">
+                                <Text style={styles.title}>Weight Loss</Text>
+                                <Center>
+                                    <Image
+                                        style={{ width: 200, height: 150 }}
+                                        source={image2}
+                                    />
+                                </Center>
+                                <Text style={{ color: 'white', paddingLeft: 80 }}>Goal Completed <FontAwesome5 name={'check'} solid /></Text>
+                            </Animatable.View>
+                        </View>
+                    </ScrollView>
                 </SafeAreaView>
             </LinearGradient>
         );
@@ -122,10 +123,6 @@ export default class ProfileScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // justifyContent: "center",
-        // alignItems: "center",
-
-
     },
 
     logo: {
@@ -134,16 +131,13 @@ const styles = StyleSheet.create({
         marginRight: 'auto',
         marginLeft: 'auto',
         marginTop: 50
-        // justifyContent: "center",
-        // alignItems: "center",
-
     },
+
     userName: {
         margin: 20,
         fontSize: 30,
         color: 'white',
         justifyContent: 'flex-start'
-
     },
 
     level: {
@@ -151,7 +145,6 @@ const styles = StyleSheet.create({
         fontSize: 30,
         color: 'white',
         justifyContent: 'flex-end'
-
     },
 
     editProfile: {
@@ -167,31 +160,34 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         paddingLeft: 100,
     },
-    trophy: {
 
-        marginTop: 70,
-        marginRight: 70,
-        marginLeft: 70,
+    trophy: {
+        marginTop: 50,
+        marginRight: 40,
+        marginLeft: 40,
         marginBottom: 20,
-        // padding: 50,
-        width: 50,
-        height: 60,
+        width: 45,
+        height: 55,
 
     },
 
     trophyBorder: {
         borderBottomWidth: 5,
-        borderBottomColor: 'orange'
+        borderBottomColor: 'orange',
+        borderRadius: 3,
+        marginRight: 20
+    },
+
+    badgeBorder: {
+        marginLeft: 20
     },
 
     badge: {
-        marginTop: 70,
+        marginTop: 50,
         marginRight: 70,
         marginLeft: 70,
-        // padding: 50,
-        width: 50,
-        height: 60
-
+        width: 45,
+        height: 55
     },
 
     goalsAccomplished: {
@@ -211,12 +207,9 @@ const styles = StyleSheet.create({
         marginLeft: 30,
         marginBottom: 10,
         height: 200,
-        // padding: 30,
-        // marginBottom: 20,
         color: 'white',
         backgroundColor: '#0D52BA',
         borderRadius: 10,
-        //shadow depth
         shadowColor: "#EF9D53",
         shadowOffset: {
             width: 4,

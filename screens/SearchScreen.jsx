@@ -134,9 +134,9 @@ const styles = StyleSheet.create({
         margin: 15,
         textAlign: 'center',
         justifyContent: 'center',
-        borderColor: '#51BA65',
+        //borderColor: '#51BA65',
         borderRadius: 10,
-        borderWidth: 3,
+        //borderWidth: 3,
         //shadow depth
         shadowColor: "#000",
         shadowOffset: {
